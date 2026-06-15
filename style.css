@@ -1,0 +1,829 @@
+/* =========================
+    ROOT VARIABLES
+========================= */
+
+:root {
+
+    --bg-main: #F7F7F5;
+
+    --text-main: #222222;
+    --text-secondary: #6B6B6B;
+
+    --accent-blue: #3A86FF;
+    --accent-purple: #8338EC;
+    --accent-navy: #1B263B;
+
+    --heading-font: "Playfair Display", serif;
+    --body-font: "Inter", sans-serif;
+
+    --footer-bg: #1B263B;
+    --footer-text: #F7F7F5;
+    --footer-border: rgba(255,255,255,0.08);
+
+}
+
+/* =========================
+    GLOBAL STYLES
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--body-font);
+    overflow-x: hidden;
+
+    transition:
+    background-color 0.4s ease,
+    color 0.4s ease;
+}
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark-mode {
+    --bg-main: #0F172A;
+    --text-main: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --accent-blue: #60A5FA;
+    --accent-purple: #A78BFA;
+    --accent-navy: #E2E8F0;
+    --footer-bg: #0B1220;
+    --footer-text: #F8FAFC;
+    --footer-border: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .journal-week {
+    background-color: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.08);
+}
+
+body.dark-mode .photo-card {
+    background-color: rgba(255,255,255,0.03);
+    border-color: rgba(255,255,255,0.08);
+}
+
+/* =========================
+    NAVBAR
+========================= */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 8%;
+    background-color: rgba(15, 23, 42, 0.88);
+    backdrop-filter: blur(14px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+
+    transition:
+    background-color 0.4s ease,
+    border-bottom 0.4s ease,
+    padding 0.3s ease;
+}
+
+/* Dark Mode Navbar */
+
+body.dark-mode .navbar {
+    background-color: rgba(15, 23, 42, 0.92);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Logo */
+
+.logo {
+    font-family: var(--heading-font);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* Navigation Links */
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: 0.3s ease;
+    position: relative;
+}
+
+/* Hover Effect */
+
+.nav-links a:hover {
+    color: var(--accent-blue);
+}
+
+/* Underline Animation */
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background-color: var(--accent-blue);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* =========================
+    DARK MODE BUTTON
+========================= */
+
+#darkModeToggle {
+    background-color: transparent;
+    border: 2px solid rgba(255,255,255,0.15);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.3s ease;
+}
+
+#darkModeToggle:hover {
+    background-color: var(--accent-blue);
+    color: white;
+    transform: rotate(10deg);
+}
+
+/* =========================
+    HERO SECTION
+========================= */
+
+/* Hero Content */
+
+.hero-content {
+    max-width: 700px;
+    color: white;
+}
+
+.hero-content h1 {
+    font-family: var(--heading-font);
+    font-size: clamp(3rem, 7vw, 5rem);
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+.hero {
+
+    position: relative;
+
+    height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+}
+/* =========================
+   HERO SLIDESHOW
+========================= */
+
+.hero-slideshow {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -1;
+
+}
+
+.slide {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0;
+
+    transition: opacity 2s ease-in-out;
+
+    background-size: cover;
+
+    background-position: center;
+
+}
+
+/* Visible Slide */
+
+.slide.active {
+
+    opacity: 1;
+
+}
+.slide:nth-child(1) {
+
+    background-image:
+    linear-gradient(
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)),
+    url("header/hero-1.jpeg");
+
+}
+
+.slide:nth-child(2) {
+
+    background-image:
+    linear-gradient(
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)),
+    url("header/hero-2.jpeg");
+
+}
+
+.slide:nth-child(3) {
+
+    background-image:
+    linear-gradient(
+    rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)),
+    url("header/hero-3.jpeg");
+
+}
+.hero-content h2 {
+
+    font-size: 1.5rem;
+
+    font-weight: 400;
+
+    margin-bottom: 1.5rem;
+
+    color: rgba(255,255,255,0.9);
+
+}
+/* Button */
+
+.hero-btn {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    background-color: var(--accent-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: 0.3s ease;
+}
+
+.hero-btn:hover {
+    background-color: var(--accent-purple);
+    transform: translateY(-3px);
+}
+
+/* =========================
+    CONTENT SECTIONS
+========================= */
+
+.content-section {
+
+    min-height: 70vh;
+    padding: 5rem 10%;
+    display: flex;
+    align-items: center;
+}
+
+.section-content {
+    max-width: 1200px;
+}
+
+.section-content h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--heading-font);
+    color: var(--accent-navy);
+}
+.section-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--heading-font);
+    color: var(--accent-navy);
+}
+
+.section-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+/* =========================
+   BACK TO TOP BUTTON
+========================= */
+
+#backToTop {
+
+    position: fixed;
+
+    bottom: 2rem;
+    right: 2rem;
+
+    width: 55px;
+    height: 55px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background-color: var(--accent-blue);
+
+    color: white;
+
+    font-size: 1.3rem;
+
+    cursor: pointer;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s ease;
+
+    z-index: 999;
+
+}
+
+#backToTop.show-btn {
+
+    opacity: 1;
+    visibility: visible;
+
+}
+
+#backToTop:hover {
+
+    background-color: var(--accent-purple);
+
+    transform: translateY(-4px);
+
+}
+
+/* =========================
+   SCROLL ANIMATIONS
+========================= */
+
+.hidden-right,
+.hidden-left,
+.fade-up {
+
+    opacity: 0;
+
+    transition:
+    opacity 1s ease,
+    transform 1s ease;
+
+}
+
+/* Right Animation */
+
+.hidden-right {
+
+    transform: translateX(100px);
+
+}
+
+/* Left Animation */
+
+.hidden-left {
+
+    transform: translateX(-100px);
+
+}
+
+/* Fade Up Animation */
+
+.fade-up {
+
+    transform: translateY(60px);
+
+}
+
+/* Show Animation */
+
+.show {
+
+    opacity: 1;
+
+    transform:
+    translateX(0)
+    translateY(0);
+
+}
+/* =========================
+   JOURNAL DROPDOWN SECTION
+========================= */
+
+/* Week Container */
+
+.journal-week {
+
+    margin-bottom: 1.5rem;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    background-color: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.12);
+
+    transition: 0.3s ease;
+
+}
+
+/* Week Title */
+
+.journal-week summary {
+
+    cursor: pointer;
+
+    padding: 1.5rem;
+
+    list-style: none;
+
+    font-size: 1.8rem;
+
+    font-family: var(--heading-font);
+
+    font-weight: 700;
+
+    color: var(--accent-blue);
+
+    transition: 0.3s ease;
+
+}
+
+/* Remove Default Arrow */
+
+.journal-week summary::-webkit-details-marker {
+
+    display: none;
+
+}
+
+/* Custom Arrow */
+
+.journal-week summary::before {
+
+    content: "▶ ";
+
+    transition: 0.3s ease;
+
+}
+
+/* Open State Arrow */
+
+.journal-week[open] summary::before {
+
+    content: "▼ ";
+
+}
+
+/* Highlight Open Week */
+
+.journal-week[open] {
+
+    border-color: var(--accent-blue);
+
+}
+
+/* Dropdown Content */
+
+.week-content {
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    transition: max-height 0.5s ease;
+
+    padding: 0 1.5rem;
+
+}
+
+/* Expanded Content */
+
+.journal-week[open] .week-content {
+
+    max-height: 5000px;
+
+    padding-bottom: 1.5rem;
+
+}
+/* =========================
+   JOURNAL ENTRY GRID
+========================= */
+
+.journal-entry {
+
+    display: grid;
+
+    grid-template-columns: 400px 1fr;
+
+    gap: 2rem;
+
+    align-items: center;
+
+    margin: 2rem 0;
+
+}
+
+/* Reflection */
+
+.reflection-card {
+
+    padding: 1rem;
+
+}
+
+.reflection-card h4 {
+
+    font-size: 1.5rem;
+
+    margin-bottom: 1rem;
+
+    color: var(--accent-purple);
+
+}
+
+.reflection-card p {
+
+    line-height: 1.8;
+
+    color: var(--text-secondary);
+
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .journal-entry {
+
+        grid-template-columns: 1fr;
+
+        gap: 1rem;
+
+    }
+
+}
+
+/* =========================
+   PHOTOGRAPHS SECTION
+========================= */
+
+.photo-intro {
+    margin-bottom: 2rem;
+}
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Card Container */
+
+.photo-card {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    perspective: 1000px;
+}
+
+/* Inner Card */
+
+.photo-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Flip State */
+
+.photo-card.flipped .photo-card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front & Back */
+
+.photo-front,
+.photo-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    border-radius: 16px;
+    overflow: hidden;
+
+    backface-visibility: hidden;
+
+    border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* Front */
+
+.photo-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 16px;
+}
+/* Back */
+
+.photo-back {
+    background-color: var(--bg-main);
+
+    transform: rotateY(180deg);
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 1.5rem;
+}
+
+.photo-back h3 {
+    margin-bottom: 0.75rem;
+    color: var(--accent-blue);
+    font-family: var(--heading-font);
+}
+
+.photo-back p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+
+/* Gallery Toggle */
+
+.gallery-btn {
+    margin-top: 2rem;
+    padding: 0.9rem 2rem;
+    background-color: var(--accent-blue);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.gallery-btn:hover {
+    background-color: var(--accent-purple);
+}
+
+.photo-gallery-container {
+    display: none;
+}
+.photo-gallery-container.open {
+    display: block;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .section-content h2 {
+        font-size: 2.2rem;
+    }
+
+    .journal-entry {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .photo-back h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .photo-back p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    .week-title {
+        font-size: 1.3rem;
+    }
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--footer-border);
+}
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin: 0.4rem 0;
+    font-size: 0.95rem;
+    color: var(--footer-text);
+    opacity: 0.8;
+}
+
+/* Week Header */
+
+.week-header {
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+.week-title {
+
+    font-size: 1.8rem;
+
+    font-family: var(--heading-font);
+
+    font-weight: 700;
+
+    color: var(--accent-blue);
+
+}
+
+.week-date {
+
+    font-size: 0.95rem;
+
+    margin-top: 0.25rem;
+
+    color: var(--text-secondary);
+
+    font-weight: 500;
+
+}
